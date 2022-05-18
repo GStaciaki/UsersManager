@@ -46,7 +46,7 @@ public class SecondScreen extends JPanel implements VisualWindow {
 	@Override
 	public void setComponents() {
 
-		textTop = new JLabel("CADASTRO DE ESTUDANTES");
+		textTop = new JLabel("CADASTRO DE USUARIOS");
 		textTop.setBounds(300, 10, 200, 30);
 		add(textTop);
 

@@ -35,7 +35,7 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 
 	@Override
 	public void setComponents() {
-		textTop = new JLabel("LISTA DE ALUNOS");
+		textTop = new JLabel("LISTA DE USUARIOS");
 		textTop.setBounds(300, 10, 200, 30);
 		add(textTop);
 		
@@ -44,7 +44,7 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 		taList.setBounds(175, 50, 400, 400);
 		add(taList);
 
-		btSubmit = new JButton("Listar Estudantes");
+		btSubmit = new JButton("Listar Usuarios");
 		btSubmit.setBounds(10, 10, 175, 25);
 		add(btSubmit);
 		

@@ -103,12 +103,12 @@ public class FrameBase extends JFrame implements VisualWindow {
 	}
 
 	public JButton getButtonList() {
-		btList = new JButton("Lista de Estudantes");
+		btList = new JButton("Lista de Usuarios");
 		return btList;
 	}
 
 	public JButton getButtonRegister() {
-		btRegister = new JButton("Cadastrar Novo Aluno");
+		btRegister = new JButton("Cadastrar Novo Usuario");
 		return btRegister;
 	}
 
