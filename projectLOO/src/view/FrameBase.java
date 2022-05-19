@@ -7,17 +7,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 public class FrameBase extends JFrame implements VisualWindow {
 
 	public CardLayout cl;
 	private PanelBase baseJP;
-	private JButton btList, btRegister, btGoBack, btGoBack2, btSubmit, btRemove;
+	private JButton btList, btRegister, btGoBack, btGoBack2, btGoBack3, btSubmit, btRemove;
 
 	public FrameBase() {
 		setLayouts();
@@ -94,6 +90,14 @@ public class FrameBase extends JFrame implements VisualWindow {
 				activateRemoveScreen();				
 			}
 		});
+		btGoBack3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				activateInitialScreen();				
+			}
+		});
+		
 
 	}
 
@@ -133,6 +137,11 @@ public class FrameBase extends JFrame implements VisualWindow {
 		return btGoBack2;
 	}
 
+	public JButton getButtonGoBack3() {
+		btGoBack3 = new JButton("Voltar");
+		return btGoBack3;
+	}
+	
 	public JButton getButtonSubmit() {
 		btSubmit = new JButton("CADASTRAR");
 		return btSubmit;

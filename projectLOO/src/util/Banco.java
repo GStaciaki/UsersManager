@@ -23,6 +23,8 @@ public class Banco {
 		String sqlCommand = "INSERT INTO Pessoa (nome, idade, cargo, cpf) VALUES ('" + nome + "', '" + idade + "' , '"
 				+ cargo + "', '" + cpf + "')";
 		stm.execute(sqlCommand);
+		
+		connection.close();
 	}
 
 	public String imprimeUsuarios() throws SQLException {

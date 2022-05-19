@@ -63,7 +63,7 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 		btRemove.setBounds(10, 150, 175, 25);
 		add(btRemove);
 
-		btGoBack = frameb.getButtonGoBack2();
+		btGoBack = frameb.getButtonGoBack3();
 		btGoBack.setBounds(50, 500, 200, 30);
 		add(btGoBack);
 	}

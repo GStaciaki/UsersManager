@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import control.Register;
+import model.Cargos;
 import model.Estudante;
 import model.Pessoa;
 import model.Professor;
@@ -23,9 +24,9 @@ public class SecondScreen extends JPanel implements VisualWindow {
 	private FrameBase frameb;
 	private JButton btSubmit, btGoBack;
 	private JTextField tfInputName, tfInputAge, tfInputCpf;
-	private String[] l = { "Estudante", "Professor", "TecnicoLab" };
-	private DefaultComboBoxModel<String> optionsCargo;
-	private JComboBox<String> tfInputCargo;
+	private Cargos[] values = Cargos.values();
+	private DefaultComboBoxModel<Cargos> optionsCargo;
+	private JComboBox<Cargos> tfInputCargo;
 	private JLabel textTop, textName, textAge, textCargo, textCpf;
 
 	public SecondScreen(FrameBase frameb) {
@@ -55,8 +56,8 @@ public class SecondScreen extends JPanel implements VisualWindow {
 		textCpf = new JLabel("CPF:");
 		tfInputCpf = new JTextField();
 		textCargo = new JLabel("CARGO:");
-		optionsCargo = new DefaultComboBoxModel<String>(l);
-		tfInputCargo = new JComboBox<String>(optionsCargo);
+		optionsCargo = new DefaultComboBoxModel<Cargos>(values);
+		tfInputCargo = new JComboBox<Cargos>(optionsCargo);
 		btSubmit = frameb.getButtonSubmit();
 		btGoBack = frameb.getButtonGoBack();
 
@@ -95,7 +96,7 @@ public class SecondScreen extends JPanel implements VisualWindow {
 				String name = tfInputName.getText();
 				int age = Integer.parseInt(tfInputAge.getText());
 				String CPF = tfInputCpf.getText();
-				String cargo = (String) tfInputCargo.getSelectedItem();
+				Cargos cargo = (Cargos) tfInputCargo.getSelectedItem();
 
 				Pessoa pessoa = Register.getPessoaInstance();
 				pessoa.setNome(name);
@@ -104,13 +105,13 @@ public class SecondScreen extends JPanel implements VisualWindow {
 
 				switch (cargo) {
 
-				case "Estudante":
+				case ESTUDANTE:
 					pessoa = new Estudante();
 					break;
-				case "Professor":
+				case PROFESSOR:
 					pessoa = new Professor();
 					break;
-				case "TecnicoLab":
+				case TECLAB:
 					pessoa = new TecnicoLab();
 					break;
 				}
