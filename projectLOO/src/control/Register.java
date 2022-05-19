@@ -16,9 +16,13 @@ public class Register {
 	public static Pessoa getPessoaInstance() {
 		return new Pessoa();
 	}
-	
-	public static String getListStudent() throws SQLException {
+
+	public static String getListUsers() throws SQLException {
 		return banco.imprimeUsuarios();
+	}
+	
+	public static void removeUser(int id) throws SQLException {
+		banco.removeUsuario(id);
 	}
 
 }

@@ -17,7 +17,7 @@ public class FrameBase extends JFrame implements VisualWindow {
 
 	public CardLayout cl;
 	private PanelBase baseJP;
-	private JButton btList, btRegister, btGoBack, btGoBack2, btSubmit;
+	private JButton btList, btRegister, btGoBack, btGoBack2, btSubmit, btRemove;
 
 	public FrameBase() {
 		setLayouts();
@@ -87,6 +87,13 @@ public class FrameBase extends JFrame implements VisualWindow {
 
 			}
 		});
+		btRemove.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				activateRemoveScreen();				
+			}
+		});
 
 	}
 
@@ -100,6 +107,10 @@ public class FrameBase extends JFrame implements VisualWindow {
 	
 	public void activateThirdScreen() {
 		cl.show(baseJP, "third");
+	}
+	
+	public void activateRemoveScreen() {
+		cl.show(baseJP, "remove");
 	}
 
 	public JButton getButtonList() {
@@ -125,5 +136,10 @@ public class FrameBase extends JFrame implements VisualWindow {
 	public JButton getButtonSubmit() {
 		btSubmit = new JButton("CADASTRAR");
 		return btSubmit;
+	}
+	
+	public JButton getButtonRemove() {
+		btRemove = new JButton("Remover Usuario");
+		return btRemove;
 	}
 }

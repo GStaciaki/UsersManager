@@ -17,7 +17,7 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 	private FrameBase frameB;
 	private JLabel textTop;
 	private JTextArea taList;
-	private JButton btSubmit, btGoBack;
+	private JButton btSubmit, btGoBack, btRemove;
 
 	public ThirdScreen(FrameBase frameB) {
 		this.frameB = frameB;
@@ -37,18 +37,22 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 	@Override
 	public void setComponents() {
 		textTop = new JLabel("LISTA DE USUARIOS");
-		textTop.setBounds(300, 10, 200, 30);
+		textTop.setBounds(350, 10, 200, 30);
 		add(textTop);
-		
+
 		taList = new JTextArea();
 		taList.setEditable(false);
-		taList.setBounds(175, 50, 400, 400);
+		taList.setBounds(200, 50, 425, 400);
 		add(taList);
 
 		btSubmit = new JButton("Listar Usuarios");
 		btSubmit.setBounds(10, 10, 175, 25);
 		add(btSubmit);
-		
+
+		btRemove = new JButton("Remover Usuario");
+		btRemove.setBounds(10, 50, 175, 25);
+		add(btRemove);
+
 		btGoBack = frameB.getButtonGoBack2();
 		btGoBack.setBounds(50, 500, 200, 30);
 		add(btGoBack);
@@ -57,17 +61,16 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 	@Override
 	public void setEvents() {
 		btSubmit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taList.setText("");
 				try {
-					taList.append(Register.getListStudent());
+					taList.append(Register.getListUsers());
 				} catch (SQLException e1) {
-					System.out.println("Erro");
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 

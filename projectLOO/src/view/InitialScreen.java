@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class InitialScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameb;
-	private JButton btRegister, btList;
+	private JButton btRegister, btList, btRemove;
 
 	public InitialScreen(FrameBase frameb) {
 		this.frameb = frameb;
@@ -36,6 +36,10 @@ public class InitialScreen extends JPanel implements VisualWindow {
 		btList = frameb.getButtonList();
 		btList.setBounds(400, 300, 300, 50);
 		add(btList);
+		
+		btRemove = frameb.getButtonRemove();
+		btRemove.setBounds(50, 375, 300, 50);
+		add(btRemove);
 	}
 
 	@Override

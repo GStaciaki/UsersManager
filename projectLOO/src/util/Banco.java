@@ -33,7 +33,7 @@ public class Banco {
 		Connection connection = connectionFactory.recuperarConexao();
 
 		Statement stm = connection.createStatement();
-		stm.execute("SELECT nome, idade, cargo, cpf FROM Pessoa");
+		stm.execute("SELECT nome, idade, cargo, cpf, idUser FROM Pessoa");
 
 		ResultSet rst = stm.getResultSet();
 
@@ -42,7 +42,9 @@ public class Banco {
 			Integer idade = rst.getInt("idade");
 			String cargo = rst.getString("cargo");
 			String cpf = rst.getString("cpf");
-			text += "Nome: " + nome + " Idade: " + idade + " Cargo: " + cargo + " CPF: " + cpf + "\n";
+			Integer idUser = rst.getInt("idUser");
+			text += " ID: " + idUser + " Nome: " + nome + " Idade: " + idade + " Cargo: " + cargo + " CPF: " + cpf
+					+ "\n";
 		}
 
 		connection.close();
@@ -50,4 +52,15 @@ public class Banco {
 		return text;
 	}
 
+	public void removeUsuario(int id) throws SQLException {
+
+		ConnectionFactory connectionFactory = new ConnectionFactory();
+		Connection connection = connectionFactory.recuperarConexao();
+
+		Statement stm = connection.createStatement();
+		String sqlCommand = "DELETE FROM Pessoa WHERE idUser = " + id;
+		stm.execute(sqlCommand);
+		
+		connection.close();
+	}
 }
