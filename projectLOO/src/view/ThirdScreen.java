@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -60,7 +61,12 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taList.setText("");
-				taList.append(Register.getListStudent());
+				try {
+					taList.append(Register.getListStudent());
+				} catch (SQLException e1) {
+					System.out.println("Erro");
+					e1.printStackTrace();
+				}
 				
 			}
 		});

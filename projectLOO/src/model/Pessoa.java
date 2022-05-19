@@ -7,7 +7,7 @@ public class Pessoa {
 	private static String cargo;
 	private static String cpf;
 
-	public static String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
@@ -15,7 +15,7 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public static int getIdade() {
+	public int getIdade() {
 		return idade;
 	}
 
@@ -27,11 +27,11 @@ public class Pessoa {
 		cargo = c;
 	}
 
-	public static String getCargo() {
+	public String getCargo() {
 		return cargo;
 	}
 
-	public static String getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 

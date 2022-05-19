@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -47,50 +48,41 @@ public class SecondScreen extends JPanel implements VisualWindow {
 	public void setComponents() {
 
 		textTop = new JLabel("CADASTRO DE USUARIOS");
-		textTop.setBounds(300, 10, 200, 30);
-		add(textTop);
-
 		textName = new JLabel("NOME:");
-		textName.setBounds(50, 100, 200, 30);
-		add(textName);
-
 		tfInputName = new JTextField();
-		tfInputName.setBounds(150, 100, 200, 30);
-		add(tfInputName);
-
 		textAge = new JLabel("IDADE:");
-		textAge.setBounds(50, 150, 200, 30);
-		add(textAge);
-
 		tfInputAge = new JTextField();
-		tfInputAge.setBounds(150, 150, 200, 30);
-		add(tfInputAge);
-
 		textCpf = new JLabel("CPF:");
-		textCpf.setBounds(50, 200, 200, 30);
-		add(textCpf);
-
 		tfInputCpf = new JTextField();
-		tfInputCpf.setBounds(150, 200, 200, 30);
-		add(tfInputCpf);
-
 		textCargo = new JLabel("CARGO:");
-		textCargo.setBounds(50, 250, 200, 30);
-		add(textCargo);
-
 		optionsCargo = new DefaultComboBoxModel<String>(l);
 		tfInputCargo = new JComboBox<String>(optionsCargo);
-		tfInputCargo.setBounds(150, 250, 200, 30);
-		add(tfInputCargo);
-
 		btSubmit = frameb.getButtonSubmit();
-		btSubmit.setBounds(500, 500, 200, 30);
-		add(btSubmit);
-
 		btGoBack = frameb.getButtonGoBack();
-		btGoBack.setBounds(50, 500, 200, 30);
-		add(btGoBack);
 
+		textTop.setBounds(300, 10, 200, 30);
+		textName.setBounds(50, 100, 200, 30);
+		tfInputName.setBounds(150, 100, 200, 30);
+		textAge.setBounds(50, 150, 200, 30);
+		tfInputAge.setBounds(150, 150, 200, 30);
+		textCpf.setBounds(50, 200, 200, 30);
+		tfInputCpf.setBounds(150, 200, 200, 30);
+		textCargo.setBounds(50, 250, 200, 30);
+		tfInputCargo.setBounds(150, 250, 200, 30);
+		btSubmit.setBounds(500, 500, 200, 30);
+		btGoBack.setBounds(50, 500, 200, 30);
+
+		add(textTop);
+		add(textName);
+		add(tfInputName);
+		add(textAge);
+		add(tfInputAge);
+		add(textCpf);
+		add(tfInputCpf);
+		add(textCargo);
+		add(tfInputCargo);
+		add(btSubmit);
+		add(btGoBack);
 	}
 
 	@Override
@@ -123,7 +115,11 @@ public class SecondScreen extends JPanel implements VisualWindow {
 					break;
 				}
 
-				Register.pessoaRegister(pessoa);
+				try {
+					Register.pessoaRegister(pessoa);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 
 				tfInputName.setText("");
 				tfInputAge.setText("");
