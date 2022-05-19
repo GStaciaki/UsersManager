@@ -17,7 +17,7 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 	private FrameBase frameB;
 	private JLabel textTop;
 	private JTextArea taList;
-	private JButton btSubmit, btGoBack, btRemove;
+	private JButton btSubmit, btGoBack;
 
 	public ThirdScreen(FrameBase frameB) {
 		this.frameB = frameB;
@@ -48,10 +48,6 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 		btSubmit = new JButton("Listar Usuarios");
 		btSubmit.setBounds(10, 10, 175, 25);
 		add(btSubmit);
-
-		btRemove = new JButton("Remover Usuario");
-		btRemove.setBounds(10, 50, 175, 25);
-		add(btRemove);
 
 		btGoBack = frameB.getButtonGoBack2();
 		btGoBack.setBounds(50, 500, 200, 30);
