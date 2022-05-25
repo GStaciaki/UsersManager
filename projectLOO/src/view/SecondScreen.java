@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 import control.Register;
 import model.Cargos;
 import model.Estudante;
+import model.InvalidDataException;
 import model.Pessoa;
 import model.Professor;
 import model.TecnicoLab;
@@ -91,17 +93,26 @@ public class SecondScreen extends JPanel implements VisualWindow {
 		btSubmit.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) throws InvalidDataException {
 
-				String name = tfInputName.getText();
-				int age = Integer.parseInt(tfInputAge.getText());
-				String CPF = tfInputCpf.getText();
+				String name, CPF;
+				int age;
+				try {
+					name = tfInputName.getText();
+					age = Integer.parseInt(tfInputAge.getText());
+					CPF = tfInputCpf.getText();
+				} catch (IllegalArgumentException e) {
+					JFrame errorFrame = new JFrame();
+					return;
+				}
 				Cargos cargo = (Cargos) tfInputCargo.getSelectedItem();
-
 				Pessoa pessoa = Register.getPessoaInstance();
 				pessoa.setNome(name);
 				pessoa.setIdade(age);
 				pessoa.setCpf(CPF);
+				if (CPF.length() != 11) {
+					throw new InvalidDataException("CPF Inválido");
+				}
 
 				switch (cargo) {
 

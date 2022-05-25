@@ -97,6 +97,12 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 
 					e1.printStackTrace();
 				}
+				taList.setText("");
+				try {
+					taList.append(Register.getListUsers());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 
 			}
 		});
