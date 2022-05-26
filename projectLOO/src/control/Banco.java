@@ -80,6 +80,22 @@ public class Banco {
 		return pessoas;
 	}
 
+	public void updateUsuario(Pessoa pessoa, int id) throws SQLException {
+		
+		ConnectionFactory connectionFactory = new ConnectionFactory();
+		Connection connection = connectionFactory.recuperarConexao();
+		
+		String nome = pessoa.getNome();
+		Integer idade = pessoa.getIdade();
+		String cpf = pessoa.getCpf();
+		
+		Statement stm = connection.createStatement();
+		String sqlCommand = "UPDATE Pessoa SET nome = '" + nome + "', idade = " + idade + ", cpf = '" + cpf + "' WHERE idUser = " + id;
+		stm.execute(sqlCommand);
+
+		connection.close();
+	}
+	
 	public void removeUsuario(int id) throws SQLException {
 
 		ConnectionFactory connectionFactory = new ConnectionFactory();
@@ -90,5 +106,36 @@ public class Banco {
 		stm.execute(sqlCommand);
 
 		connection.close();
+	}
+	
+	public Pessoa getUser(int id) throws SQLException {
+		
+		ConnectionFactory connectionFactory = new ConnectionFactory();
+		Connection connection = connectionFactory.recuperarConexao();
+
+		Statement stm = connection.createStatement();
+		String sqlCommand = "SELECT nome, idade, cargo, cpf, idUser FROM Pessoa WHERE idUser = " + id;
+		stm.execute(sqlCommand);
+
+		ResultSet rst = stm.getResultSet();
+		
+		Pessoa pessoa = new Pessoa();
+		
+		while(rst.next()) {
+			String nome = rst.getString("nome");
+			Integer idade = rst.getInt("idade");
+			String cargo = rst.getString("cargo");
+			String cpf = rst.getString("cpf");
+			Integer idUser = rst.getInt("idUser");
+			
+			
+			pessoa.setNome(nome);
+			pessoa.setIdade(idade);
+			pessoa.setCpf(cpf);
+			pessoa.setIdUser(idUser);
+			pessoa.setCargo(cargo);
+		}
+		
+		return pessoa;
 	}
 }

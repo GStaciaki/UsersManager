@@ -13,7 +13,8 @@ public class FrameBase extends JFrame implements VisualWindow {
 
 	public CardLayout cl;
 	private PanelBase baseJP;
-	private JButton btList, btRegister, btGoBack, btGoBack2, btGoBack3, btSubmit, btRemove;
+	private JButton btList, btRegister, btGoBack, btGoBack2, btGoBack3, btGoBack4,
+	btSubmit, btRemove, btUpdate, btUpdateAndBack;
 
 	public FrameBase() {
 		setLayouts();
@@ -84,37 +85,63 @@ public class FrameBase extends JFrame implements VisualWindow {
 			}
 		});
 		btRemove.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				activateRemoveScreen();				
+				activateRemoveScreen();
 			}
 		});
 		btGoBack3.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				activateInitialScreen();				
+				activateInitialScreen();
+			}
+		});
+		btUpdate.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				activateUpdateScreen();
+
+			}
+		});
+		btGoBack4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				activateInitialScreen();
 			}
 		});
 		
+		btUpdateAndBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				activateInitialScreen();
+			}
+		});
 
 	}
 
 	public void activateInitialScreen() {
 		cl.show(baseJP, "initial");
 	}
-	
+
 	public void activateSecondScreen() {
 		cl.show(baseJP, "second");
 	}
-	
+
 	public void activateThirdScreen() {
 		cl.show(baseJP, "third");
 	}
-	
+
 	public void activateRemoveScreen() {
 		cl.show(baseJP, "remove");
+	}
+
+	public void activateUpdateScreen() {
+		cl.show(baseJP, "update");
 	}
 
 	public JButton getButtonList() {
@@ -141,14 +168,29 @@ public class FrameBase extends JFrame implements VisualWindow {
 		btGoBack3 = new JButton("Voltar");
 		return btGoBack3;
 	}
-	
+
+	public JButton getButtonGoBack4() {
+		btGoBack4 = new JButton("Voltar");
+		return btGoBack4;
+	}
+
 	public JButton getButtonSubmit() {
 		btSubmit = new JButton("CADASTRAR");
 		return btSubmit;
 	}
-	
+
 	public JButton getButtonRemove() {
 		btRemove = new JButton("Remover Usuario");
 		return btRemove;
+	}
+
+	public JButton getButtonUpdate() {
+		btUpdate = new JButton("Alterar Usuario");
+		return btUpdate;
+	}
+	
+	public JButton getButtonUpdateAndClose() {
+		btUpdateAndBack = new JButton("Alterar");
+		return btUpdateAndBack;
 	}
 }

@@ -14,6 +14,7 @@ public class Register {
 
 	private static Banco banco = new Banco();
 	static ArrayList<Pessoa> pessoas;
+	static Pessoa pessoa;
 
 	public Register() throws SQLException {
 		pessoas = banco.getUsers();
@@ -72,5 +73,13 @@ public class Register {
 	public static void removeUser(int id) throws SQLException {
 		banco.removeUsuario(id);
 	}
-
+	
+	public static Pessoa getUser(int id) throws SQLException {
+		return banco.getUser(id);
+	}
+	
+	public static void updateUser(Pessoa pessoa, int id) throws SQLException {
+		banco.updateUsuario(pessoa, id);
+	}
+	
 }

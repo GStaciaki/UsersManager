@@ -12,7 +12,8 @@ public class PanelBase extends JPanel implements VisualWindow {
 	private SecondScreen secondJP;
 	private ThirdScreen thirdJP;
 	private RemoveScreen removeJP;
-
+	private UpdateScreen updateJP;
+	
 	public PanelBase(FrameBase frameB) {
 		this.frameB = frameB;
 		setLayouts();
@@ -35,11 +36,13 @@ public class PanelBase extends JPanel implements VisualWindow {
 		secondJP = new SecondScreen(frameB);
 		thirdJP = new ThirdScreen(frameB);
 		removeJP = new RemoveScreen(frameB);
+		updateJP = new UpdateScreen(frameB);
 		
 		add(initialJP, "initial");
 		add(secondJP, "second");
 		add(thirdJP, "third");
 		add(removeJP, "remove");
+		add(updateJP, "update");
 	}
 
 	@Override
