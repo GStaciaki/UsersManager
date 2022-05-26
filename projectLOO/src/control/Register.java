@@ -16,11 +16,6 @@ public class Register {
 	static ArrayList<Pessoa> pessoas;
 	static Pessoa pessoa;
 
-	public Register() throws SQLException {
-		pessoas = banco.getUsers();
-	}
-	
-
 	public static void pessoaRegister(Pessoa pessoa) throws SQLException {
 		banco.addUsuario(pessoa);
 	}
@@ -30,13 +25,13 @@ public class Register {
 	}
 
 	public static String getListUsers() throws SQLException {
-		pessoas = banco.getUsers();
+		populateArrayList();
 
 		return iterateArrayList();
 	}
 
 	public static String getUsersByAge() throws SQLException {
-		pessoas = banco.getUsers();
+		populateArrayList();
 		Collections.sort(pessoas, new SortByAge());
 
 		return iterateArrayList();
@@ -44,7 +39,7 @@ public class Register {
 	}
 
 	public static String getUsersByName() throws SQLException {
-		pessoas = banco.getUsers();
+		populateArrayList();
 		Collections.sort(pessoas, new SortByName());
 
 		return iterateArrayList();
@@ -52,12 +47,16 @@ public class Register {
 	}
 	
 	public static String getUsersByCargo() throws SQLException {
-		pessoas = banco.getUsers();
+		populateArrayList();
 		Collections.sort(pessoas, new SortByCargo());
 		
 		return iterateArrayList();
 	}
 
+	public static void populateArrayList() throws SQLException {
+		pessoas = banco.getUsers();
+	}
+	
 	public static String iterateArrayList() {
 
 		String text = "";

@@ -136,6 +136,8 @@ public class Banco {
 			pessoa.setCargo(cargo);
 		}
 		
+		connection.close();
+		
 		return pessoa;
 	}
 }
