@@ -15,9 +15,9 @@ import control.Register;
 public class ThirdScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameB;
-	private JLabel textTop;
+	private JLabel textTop, textSort;
 	private JTextArea taList;
-	private JButton btSubmit, btGoBack;
+	private JButton btGoBack, btSortAge, btSortName, btSortCargo;
 
 	public ThirdScreen(FrameBase frameB) {
 		this.frameB = frameB;
@@ -45,9 +45,21 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 		taList.setBounds(200, 50, 425, 400);
 		add(taList);
 
-		btSubmit = new JButton("Listar Usuarios");
-		btSubmit.setBounds(10, 10, 175, 25);
-		add(btSubmit);
+		textSort = new JLabel("Listar Usuarios:");
+		textSort.setBounds(50, 10, 175, 25);
+		add(textSort);
+
+		btSortAge = new JButton("Por Idade");
+		btSortAge.setBounds(10, 50, 175, 25);
+		add(btSortAge);
+
+		btSortName = new JButton("Por Nome");
+		btSortName.setBounds(10, 90, 175, 25);
+		add(btSortName);
+
+		btSortCargo = new JButton("Por Cargo");
+		btSortCargo.setBounds(10, 130, 175, 25);
+		add(btSortCargo);
 
 		btGoBack = frameB.getButtonGoBack2();
 		btGoBack.setBounds(50, 500, 200, 30);
@@ -56,17 +68,45 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 
 	@Override
 	public void setEvents() {
-		btSubmit.addActionListener(new ActionListener() {
+		
+		btSortAge.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taList.setText("");
 				try {
-					taList.append(Register.getListUsers());
+					taList.append(Register.getUsersByAge());
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 
+			}
+		});
+
+		btSortName.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				taList.setText("");
+				try {
+					taList.append(Register.getUsersByName());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btSortCargo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				taList.setText("");
+				try {
+					taList.append(Register.getUsersByCargo());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 

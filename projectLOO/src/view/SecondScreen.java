@@ -97,23 +97,16 @@ public class SecondScreen extends JPanel implements VisualWindow {
 
 				String name, CPF;
 				int age;
+				Pessoa pessoa;
 				try {
 					name = tfInputName.getText();
 					age = Integer.parseInt(tfInputAge.getText());
 					CPF = tfInputCpf.getText();
 				} catch (IllegalArgumentException e) {
-					JFrame errorFrame = new JFrame();
+//					JFrame errorFrame = new JFrame();
 					return;
 				}
 				Cargos cargo = (Cargos) tfInputCargo.getSelectedItem();
-				Pessoa pessoa = Register.getPessoaInstance();
-				pessoa.setNome(name);
-				pessoa.setIdade(age);
-				pessoa.setCpf(CPF);
-				if (CPF.length() != 11) {
-					throw new InvalidDataException("CPF Inválido");
-				}
-
 				switch (cargo) {
 
 				case ESTUDANTE:
@@ -125,8 +118,18 @@ public class SecondScreen extends JPanel implements VisualWindow {
 				case TECLAB:
 					pessoa = new TecnicoLab();
 					break;
+				default:
+					pessoa = Register.getPessoaInstance();
+				}
+ 
+				pessoa.setNome(name);
+				pessoa.setIdade(age);
+				pessoa.setCpf(CPF);
+				if (CPF.length() != 11) {
+					throw new InvalidDataException("CPF Inválido");
 				}
 
+				
 				try {
 					Register.pessoaRegister(pessoa);
 				} catch (SQLException e) {

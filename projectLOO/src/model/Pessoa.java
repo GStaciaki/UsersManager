@@ -2,10 +2,19 @@ package model;
 
 public class Pessoa {
 
-	private static String nome;
-	private static int idade;
-	private static String cargo;
-	private static String cpf;
+	private String nome;
+	private int idade;
+	private String cargo;
+	private String cpf;
+	private int idUser;
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 
 	public String getNome() {
 		return nome;
@@ -23,7 +32,7 @@ public class Pessoa {
 		this.idade = idade;
 	}
 
-	public static void setCargo(String c) {
+	public void setCargo(String c) {
 		cargo = c;
 	}
 

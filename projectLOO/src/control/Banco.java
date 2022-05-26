@@ -1,11 +1,16 @@
-package util;
+package control;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import model.Estudante;
 import model.Pessoa;
+import model.Professor;
+import model.TecnicoLab;
+import util.ConnectionFactory;
 
 public class Banco {
 
@@ -23,14 +28,14 @@ public class Banco {
 		String sqlCommand = "INSERT INTO Pessoa (nome, idade, cargo, cpf) VALUES ('" + nome + "', '" + idade + "' , '"
 				+ cargo + "', '" + cpf + "')";
 		stm.execute(sqlCommand);
-		
+
 		connection.close();
 	}
 
-	public String imprimeUsuarios() throws SQLException {
-
-		String text = "";
-
+	public ArrayList<Pessoa> getUsers() throws SQLException {
+		
+		ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
+		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 		Connection connection = connectionFactory.recuperarConexao();
 
@@ -40,18 +45,39 @@ public class Banco {
 		ResultSet rst = stm.getResultSet();
 
 		while (rst.next()) {
+			Pessoa pessoa;
 			String nome = rst.getString("nome");
 			Integer idade = rst.getInt("idade");
 			String cargo = rst.getString("cargo");
 			String cpf = rst.getString("cpf");
 			Integer idUser = rst.getInt("idUser");
-			text += " ID: " + idUser + " Nome: " + nome + " Idade: " + idade + " Cargo: " + cargo + " CPF: " + cpf
-					+ "\n";
+
+			switch (cargo) {
+
+			case "Estudante":
+				pessoa = new Estudante();
+				break;
+			case "Professor":
+				pessoa = new Professor();
+				break;
+			case "Tecnico Lab":
+				pessoa = new TecnicoLab();
+				break;
+			default:
+				pessoa = new Pessoa();
+			}
+			
+			pessoa.setNome(nome);
+			pessoa.setIdade(idade);
+			pessoa.setCpf(cpf);
+			pessoa.setIdUser(idUser);
+
+			pessoas.add(pessoa);
 		}
 
 		connection.close();
-
-		return text;
+		
+		return pessoas;
 	}
 
 	public void removeUsuario(int id) throws SQLException {
@@ -62,7 +88,7 @@ public class Banco {
 		Statement stm = connection.createStatement();
 		String sqlCommand = "DELETE FROM Pessoa WHERE idUser = " + id;
 		stm.execute(sqlCommand);
-		
+
 		connection.close();
 	}
 }

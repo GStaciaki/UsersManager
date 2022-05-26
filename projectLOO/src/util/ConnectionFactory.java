@@ -9,6 +9,6 @@ public class ConnectionFactory {
 	public Connection recuperarConexao() throws SQLException {
 		return DriverManager
 				.getConnection("jdbc:mysql://localhost/bancoLOO?useTimeZone=true&serverTimezone=UTC", 
-						"dev", "1!2@3#4$dev");
+						"root", "1982664");
 	}
 }
