@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import control.Register;
 import model.Cargos;
@@ -103,7 +104,16 @@ public class SecondScreen extends JPanel implements VisualWindow {
 					age = Integer.parseInt(tfInputAge.getText());
 					CPF = tfInputCpf.getText();
 				} catch (IllegalArgumentException e) {
-//					JFrame errorFrame = new JFrame();
+					JFrame errorFrame = new JFrame();
+					errorFrame.setSize(400, 200);
+					errorFrame.setVisible(true);
+					errorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+					try {
+						Thread.sleep(5000);
+						errorFrame.setVisible(false);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 					return;
 				}
 				Cargos cargo = (Cargos) tfInputCargo.getSelectedItem();
@@ -121,15 +131,14 @@ public class SecondScreen extends JPanel implements VisualWindow {
 				default:
 					pessoa = Register.getPessoaInstance();
 				}
- 
+
 				pessoa.setNome(name);
 				pessoa.setIdade(age);
 				pessoa.setCpf(CPF);
 				if (CPF.length() != 11) {
-					throw new InvalidDataException("CPF Inválido");
+					throw new InvalidDataException("CPF Invalido");
 				}
 
-				
 				try {
 					Register.pessoaRegister(pessoa);
 				} catch (SQLException e) {
