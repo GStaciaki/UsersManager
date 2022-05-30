@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 import control.Register;
 import model.Cargos;
@@ -101,10 +99,7 @@ public class RegistrationScreen extends JPanel implements VisualWindow {
 					age = Integer.parseInt(tfInputAge.getText());
 					CPF = tfInputCpf.getText();
 				} catch (IllegalArgumentException e) {
-					JFrame errorFrame = new JFrame();
-					errorFrame.setSize(400, 200);
-					errorFrame.setVisible(true);
-					errorFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+					ErrorFrame errorFrame = new ErrorFrame();
 					try {
 						Thread.sleep(5000);
 						errorFrame.setVisible(false);
@@ -146,7 +141,7 @@ public class RegistrationScreen extends JPanel implements VisualWindow {
 				tfInputName.setText("");
 				tfInputAge.setText("");
 				tfInputCpf.setText("");
-				
+
 			}
 		});
 		btGoBack.addActionListener(new ActionListener() {

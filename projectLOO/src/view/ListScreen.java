@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import control.Register;
 
@@ -15,8 +16,11 @@ public class ListScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameB;
 	private JLabel textTop, textSort;
-	private JTextArea taList;
 	private JButton btGoBack, btSortAge, btSortName, btSortCargo;
+	private JTable table;
+	private JScrollPane scrollPane;
+	private final String colunas[] = { "ID:", "Nome:", "Idade:", "Cargo:", "CPF:" };
+	private String dados[][] = { /* {"", "", "", "", ""} */ };
 
 	public ListScreen(FrameBase frameB) {
 		this.frameB = frameB;
@@ -37,14 +41,21 @@ public class ListScreen extends JPanel implements VisualWindow {
 		textTop.setBounds(350, 10, 200, 30);
 		add(textTop);
 
-		taList = new JTextArea();
-		taList.setEditable(false);
-		taList.setBounds(200, 50, 425, 400);
-		add(taList);
-
 		textSort = new JLabel("Listar Usuarios:");
 		textSort.setBounds(50, 10, 175, 25);
 		add(textSort);
+		
+		try {
+			dados = Register.getListUsers();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		table = new JTable(dados, colunas);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(200, 50, 425, 400);
+		add(scrollPane);
 
 		btSortAge = new JButton("Por Idade");
 		btSortAge.setBounds(10, 50, 175, 25);
@@ -70,9 +81,13 @@ public class ListScreen extends JPanel implements VisualWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taList.setText("");
 				try {
-					taList.append(Register.getUsersByAge());
+					dados = Register.getUsersByAge();
+					table = new JTable(dados, colunas);
+					scrollPane = new JScrollPane(table);
+					scrollPane.setBounds(200, 50, 425, 400);
+					add(scrollPane);
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -84,12 +99,17 @@ public class ListScreen extends JPanel implements VisualWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taList.setText("");
 				try {
-					taList.append(Register.getUsersByName());
+					dados = Register.getUsersByName();
+					table = new JTable(dados, colunas);
+					scrollPane = new JScrollPane(table);
+					scrollPane.setBounds(200, 50, 425, 400);
+					add(scrollPane);
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
 			}
 		});
 
@@ -97,10 +117,14 @@ public class ListScreen extends JPanel implements VisualWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				taList.setText("");
 				try {
-					taList.append(Register.getUsersByCargo());
+					dados = Register.getUsersByCargo();
+					table = new JTable(dados, colunas);
+					scrollPane = new JScrollPane(table);
+					scrollPane.setBounds(200, 50, 425, 400);
+					add(scrollPane);
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -108,7 +132,7 @@ public class ListScreen extends JPanel implements VisualWindow {
 		});
 
 		btGoBack.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frameB.activateInitialScreen();

@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import control.Register;
@@ -16,9 +17,12 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameb;
 	private JLabel textTop, textRemove;
-	private JTextArea taList;
+	private JTable table;
+	private JScrollPane scrollPane;
 	private JTextField tfIdRemove;
-	private JButton btSubmit, btGoBack, btRemove;
+	private JButton btGoBack, btRemove;
+	private final String colunas[] = { "ID:", "Nome:", "Idade:", "Cargo:", "CPF:" };
+	private String dados[][] = {};
 
 	public RemoveScreen(FrameBase frameb) {
 		this.frameb = frameb;
@@ -40,14 +44,16 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 		textTop.setBounds(350, 10, 200, 30);
 		add(textTop);
 
-		taList = new JTextArea();
-		taList.setEditable(false);
-		taList.setBounds(200, 50, 425, 400);
-		add(taList);
-
-		btSubmit = new JButton("Listar Usuarios");
-		btSubmit.setBounds(10, 10, 175, 25);
-		add(btSubmit);
+		try {
+			dados = Register.getListUsers();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		table = new JTable(dados, colunas);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(200, 50, 425, 400);
+		add(scrollPane);
 
 		textRemove = new JLabel("ID Usuario: ");
 		textRemove.setBounds(10, 100, 175, 25);
@@ -69,20 +75,6 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 	@Override
 	public void setEvents() {
 
-		btSubmit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				taList.setText("");
-				try {
-					taList.append(Register.getListUsers());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
-
 		btRemove.addActionListener(new ActionListener() {
 
 			@Override
@@ -93,13 +85,13 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 
 					Register.removeUser(idUser);
 				} catch (SQLException | NumberFormatException e1) {
-					
+
 					return;
 				}
-				taList.setText("");
 				try {
-					taList.append(Register.getListUsers());
+					dados = Register.getListUsers();
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -107,7 +99,7 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 			}
 		});
 		btGoBack.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frameb.activateInitialScreen();

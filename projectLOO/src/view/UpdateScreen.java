@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import control.Register;
@@ -17,9 +18,12 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameb;
 	private JLabel textTop, textId, textName, textAge, textCpf;
-	private JTextArea taList;
+	private JTable table;
+	private JScrollPane scrollPane;
 	private JTextField tfSetId, tfName, tfAge, tfCpf;
-	private JButton btLoad, btGoBack, btSelect, btUpdate;
+	private JButton btGoBack, btSelect, btUpdate;
+	private final String colunas[] = { "ID:", "Nome:", "Idade:", "Cargo:", "CPF:" };
+	private String dados[][] = {};
 
 	public UpdateScreen(FrameBase frameb) {
 		this.frameb = frameb;
@@ -40,14 +44,16 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 		textTop.setBounds(350, 10, 200, 30);
 		add(textTop);
 
-		taList = new JTextArea();
-		taList.setEditable(false);
-		taList.setBounds(200, 50, 425, 250);
-		add(taList);
-
-		btLoad = new JButton("Listar Usuarios");
-		btLoad.setBounds(10, 10, 175, 25);
-		add(btLoad);
+		try {
+			dados = Register.getListUsers();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		table = new JTable(dados, colunas);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(200, 50, 425, 400);
+		add(scrollPane);
 
 		textId = new JLabel("ID Usuario: ");
 		textId.setBounds(10, 100, 175, 25);
@@ -90,20 +96,6 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 
 	@Override
 	public void setEvents() {
-		btLoad.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				taList.setText("");
-				try {
-					taList.append(Register.getListUsers());
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-
-			}
-		});
-
 		btSelect.addActionListener(new ActionListener() {
 
 			@Override
@@ -126,7 +118,6 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 					tfAge.setText(Integer.toString(pessoa.getIdade()));
 					tfCpf.setText(pessoa.getCpf());
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 

@@ -23,6 +23,7 @@ public class FrameBase extends JFrame implements VisualWindow {
 		setSize(800, 600);
 		setVisible(true);
 		setLayout(new BorderLayout());
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
