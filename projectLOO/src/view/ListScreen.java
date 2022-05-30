@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -12,14 +11,14 @@ import javax.swing.JTextArea;
 
 import control.Register;
 
-public class ThirdScreen extends JPanel implements VisualWindow {
+public class ListScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameB;
 	private JLabel textTop, textSort;
 	private JTextArea taList;
 	private JButton btGoBack, btSortAge, btSortName, btSortCargo;
 
-	public ThirdScreen(FrameBase frameB) {
+	public ListScreen(FrameBase frameB) {
 		this.frameB = frameB;
 		setLayouts();
 		setComponents();
@@ -30,8 +29,6 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-//		setBackground(Color.GRAY);
-
 	}
 
 	@Override

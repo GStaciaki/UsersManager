@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 
 import javax.swing.JPanel;
 
@@ -9,8 +8,8 @@ public class PanelBase extends JPanel implements VisualWindow {
 
 	private FrameBase frameB;
 	private InitialScreen initialJP;
-	private SecondScreen secondJP;
-	private ThirdScreen thirdJP;
+	private RegistrationScreen secondJP;
+	private ListScreen thirdJP;
 	private RemoveScreen removeJP;
 	private UpdateScreen updateJP;
 
@@ -25,7 +24,6 @@ public class PanelBase extends JPanel implements VisualWindow {
 	@Override
 	public void setLayouts() {
 		setLayout(new CardLayout());
-		setBackground(Color.GRAY);
 		setVisible(true);
 
 	}
@@ -33,8 +31,8 @@ public class PanelBase extends JPanel implements VisualWindow {
 	@Override
 	public void setComponents() {
 		initialJP = new InitialScreen(frameB);
-		secondJP = new SecondScreen(frameB);
-		thirdJP = new ThirdScreen(frameB);
+		secondJP = new RegistrationScreen(frameB);
+		thirdJP = new ListScreen(frameB);
 		removeJP = new RemoveScreen(frameB);
 		updateJP = new UpdateScreen(frameB);
 

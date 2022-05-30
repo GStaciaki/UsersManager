@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -22,7 +21,7 @@ import model.Pessoa;
 import model.Professor;
 import model.TecnicoLab;
 
-public class SecondScreen extends JPanel implements VisualWindow {
+public class RegistrationScreen extends JPanel implements VisualWindow {
 
 	private FrameBase frameb;
 	private JButton btSubmit, btGoBack;
@@ -32,7 +31,7 @@ public class SecondScreen extends JPanel implements VisualWindow {
 	private JComboBox<Cargos> tfInputCargo;
 	private JLabel textTop, textName, textAge, textCargo, textCpf;
 
-	public SecondScreen(FrameBase frameb) {
+	public RegistrationScreen(FrameBase frameb) {
 		this.frameb = frameb;
 		setLayouts();
 		setComponents();
@@ -44,8 +43,6 @@ public class SecondScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-//		setBackground(Color.GRAY);
-
 	}
 
 	@Override
