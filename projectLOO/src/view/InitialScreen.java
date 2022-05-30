@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -22,26 +24,26 @@ public class InitialScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-		setBackground(Color.gray);
+//		setBackground(Color.gray);
 
 	}
 
 	@Override
 	public void setComponents() {
 
-		btRegister = frameb.getButtonRegister();
+		btRegister = new JButton("Cadastrar Novo Usuario");
 		btRegister.setBounds(50, 300, 300, 50);
 		add(btRegister);
 
-		btList = frameb.getButtonList();
+		btList = new JButton("Lista de Usuarios");
 		btList.setBounds(400, 300, 300, 50);
 		add(btList);
-		
-		btRemove = frameb.getButtonRemove();
+
+		btRemove = new JButton("Remover Usuario");
 		btRemove.setBounds(50, 375, 300, 50);
 		add(btRemove);
-		
-		btUpdate = frameb.getButtonUpdate();
+
+		btUpdate = new JButton("Alterar Usuario");
 		btUpdate.setBounds(400, 375, 300, 50);
 		add(btUpdate);
 	}
@@ -49,6 +51,34 @@ public class InitialScreen extends JPanel implements VisualWindow {
 	@Override
 	public void setEvents() {
 
+		btRegister.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateSecondScreen();
+			}
+		});
+		btList.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateThirdScreen();
+			}
+		});
+		btRemove.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateRemoveScreen();
+			}
+		});
+		btUpdate.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateUpdateScreen();
+			}
+		});
 	}
 
 }

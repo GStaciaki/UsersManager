@@ -44,7 +44,7 @@ public class SecondScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-		setBackground(Color.GRAY);
+//		setBackground(Color.GRAY);
 
 	}
 
@@ -61,8 +61,8 @@ public class SecondScreen extends JPanel implements VisualWindow {
 		textCargo = new JLabel("CARGO:");
 		optionsCargo = new DefaultComboBoxModel<Cargos>(values);
 		tfInputCargo = new JComboBox<Cargos>(optionsCargo);
-		btSubmit = frameb.getButtonSubmit();
-		btGoBack = frameb.getButtonGoBack();
+		btSubmit = new JButton("CADASTRAR");
+		btGoBack = new JButton("Voltar");
 
 		textTop.setBounds(300, 10, 200, 30);
 		textName.setBounds(50, 100, 200, 30);
@@ -94,7 +94,7 @@ public class SecondScreen extends JPanel implements VisualWindow {
 		btSubmit.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) throws InvalidDataException {
+			public void actionPerformed(ActionEvent arg0) {
 
 				String name, CPF;
 				int age;
@@ -111,6 +111,7 @@ public class SecondScreen extends JPanel implements VisualWindow {
 					try {
 						Thread.sleep(5000);
 						errorFrame.setVisible(false);
+						frameb.activateInitialScreen();
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
@@ -148,6 +149,14 @@ public class SecondScreen extends JPanel implements VisualWindow {
 				tfInputName.setText("");
 				tfInputAge.setText("");
 				tfInputCpf.setText("");
+				
+			}
+		});
+		btGoBack.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateInitialScreen();
 			}
 		});
 

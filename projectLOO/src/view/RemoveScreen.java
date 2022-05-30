@@ -32,7 +32,7 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-		setBackground(Color.GRAY);
+//		setBackground(Color.GRAY);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 		btRemove.setBounds(10, 150, 175, 25);
 		add(btRemove);
 
-		btGoBack = frameb.getButtonGoBack3();
+		btGoBack = new JButton("Voltar");
 		btGoBack.setBounds(50, 500, 200, 30);
 		add(btGoBack);
 	}
@@ -90,12 +90,13 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int idUser = Integer.parseInt(tfIdRemove.getText());
 				try {
-					Register.removeUser(idUser);
-				} catch (SQLException e1) {
+					int idUser = Integer.parseInt(tfIdRemove.getText());
 
-					e1.printStackTrace();
+					Register.removeUser(idUser);
+				} catch (SQLException | NumberFormatException e1) {
+					
+					return;
 				}
 				taList.setText("");
 				try {
@@ -104,6 +105,14 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 					e1.printStackTrace();
 				}
 
+				frameb.activateInitialScreen();
+			}
+		});
+		btGoBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateInitialScreen();
 			}
 		});
 	}

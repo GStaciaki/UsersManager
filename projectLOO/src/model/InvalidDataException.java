@@ -1,6 +1,6 @@
 package model;
 
-public class InvalidDataException extends IllegalArgumentException {
+public class InvalidDataException extends RuntimeException {
 
 	public InvalidDataException(String message) {
 		super(message);

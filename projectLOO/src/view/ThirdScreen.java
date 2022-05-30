@@ -30,7 +30,7 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-		setBackground(Color.GRAY);
+//		setBackground(Color.GRAY);
 
 	}
 
@@ -61,14 +61,14 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 		btSortCargo.setBounds(10, 130, 175, 25);
 		add(btSortCargo);
 
-		btGoBack = frameB.getButtonGoBack2();
+		btGoBack = new JButton("Voltar");
 		btGoBack.setBounds(50, 500, 200, 30);
 		add(btGoBack);
 	}
 
 	@Override
 	public void setEvents() {
-		
+
 		btSortAge.addActionListener(new ActionListener() {
 
 			@Override
@@ -95,9 +95,9 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 				}
 			}
 		});
-		
+
 		btSortCargo.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				taList.setText("");
@@ -106,10 +106,17 @@ public class ThirdScreen extends JPanel implements VisualWindow {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 
+		btGoBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameB.activateInitialScreen();
+			}
+		});
 	}
 
 }

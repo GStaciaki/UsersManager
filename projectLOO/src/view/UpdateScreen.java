@@ -20,7 +20,7 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 	private JLabel textTop, textId, textName, textAge, textCpf;
 	private JTextArea taList;
 	private JTextField tfSetId, tfName, tfAge, tfCpf;
-	private JButton btSubmit, btGoBack, btSelect, btUpdate;
+	private JButton btLoad, btGoBack, btSelect, btUpdate;
 
 	public UpdateScreen(FrameBase frameb) {
 		this.frameb = frameb;
@@ -33,7 +33,7 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 	public void setLayouts() {
 		setLayout(null);
 		setVisible(true);
-		setBackground(Color.GRAY);
+//		setBackground(Color.GRAY);
 
 	}
 
@@ -48,9 +48,9 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 		taList.setBounds(200, 50, 425, 250);
 		add(taList);
 
-		btSubmit = new JButton("Listar Usuarios");
-		btSubmit.setBounds(10, 10, 175, 25);
-		add(btSubmit);
+		btLoad = new JButton("Listar Usuarios");
+		btLoad.setBounds(10, 10, 175, 25);
+		add(btLoad);
 
 		textId = new JLabel("ID Usuario: ");
 		textId.setBounds(10, 100, 175, 25);
@@ -82,18 +82,18 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 		tfCpf = new JTextField();
 		tfCpf.setBounds(550, 325, 175, 25);
 
-		btGoBack = frameb.getButtonGoBack4();
+		btGoBack = new JButton("Voltar");
 		btGoBack.setBounds(50, 500, 200, 30);
 		add(btGoBack);
 
-		btUpdate = frameb.getButtonUpdateAndClose();
+		btUpdate = new JButton("Alterar");
 		btUpdate.setBounds(500, 500, 200, 30);
 
 	}
 
 	@Override
 	public void setEvents() {
-		btSubmit.addActionListener(new ActionListener() {
+		btLoad.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -135,9 +135,9 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 
 			}
 		});
-		
+
 		btUpdate.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Integer id = Integer.parseInt(tfSetId.getText());
@@ -148,10 +148,9 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 				try {
 					Register.updateUser(pessoa, id);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				remove(textName);
 				remove(tfName);
 				remove(textAge);
@@ -159,10 +158,19 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 				remove(textCpf);
 				remove(tfCpf);
 				remove(btUpdate);
-				
+
+				frameb.activateInitialScreen();
 			}
 		});
 
+		btGoBack.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameb.activateInitialScreen();
+				
+			}
+		});
 	}
 
 }
