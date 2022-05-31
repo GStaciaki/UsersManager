@@ -142,6 +142,8 @@ public class RegistrationScreen extends JPanel implements VisualWindow {
 				tfInputAge.setText("");
 				tfInputCpf.setText("");
 
+				frameb.activateInitialScreen();
+
 			}
 		});
 		btGoBack.addActionListener(new ActionListener() {

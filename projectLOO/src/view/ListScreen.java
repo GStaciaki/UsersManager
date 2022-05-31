@@ -20,7 +20,7 @@ public class ListScreen extends JPanel implements VisualWindow {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private final String colunas[] = { "ID:", "Nome:", "Idade:", "Cargo:", "CPF:" };
-	private String dados[][] = { /* {"", "", "", "", ""} */ };
+	private String dados[][] = {};
 
 	public ListScreen(FrameBase frameB) {
 		this.frameB = frameB;
@@ -48,14 +48,11 @@ public class ListScreen extends JPanel implements VisualWindow {
 		try {
 			dados = Register.getListUsers();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		table = new JTable(dados, colunas);
-		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(200, 50, 425, 400);
-		add(scrollPane);
+		add(createScrollPane());
 
 		btSortAge = new JButton("Por Idade");
 		btSortAge.setBounds(10, 50, 175, 25);
@@ -84,9 +81,7 @@ public class ListScreen extends JPanel implements VisualWindow {
 				try {
 					dados = Register.getUsersByAge();
 					table = new JTable(dados, colunas);
-					scrollPane = new JScrollPane(table);
-					scrollPane.setBounds(200, 50, 425, 400);
-					add(scrollPane);
+					add(createScrollPane());
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -102,9 +97,7 @@ public class ListScreen extends JPanel implements VisualWindow {
 				try {
 					dados = Register.getUsersByName();
 					table = new JTable(dados, colunas);
-					scrollPane = new JScrollPane(table);
-					scrollPane.setBounds(200, 50, 425, 400);
-					add(scrollPane);
+					add(createScrollPane());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -120,9 +113,7 @@ public class ListScreen extends JPanel implements VisualWindow {
 				try {
 					dados = Register.getUsersByCargo();
 					table = new JTable(dados, colunas);
-					scrollPane = new JScrollPane(table);
-					scrollPane.setBounds(200, 50, 425, 400);
-					add(scrollPane);
+					add(createScrollPane());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -138,6 +129,13 @@ public class ListScreen extends JPanel implements VisualWindow {
 				frameB.activateInitialScreen();
 			}
 		});
+	}
+	
+	public JScrollPane createScrollPane() {
+		scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(200, 50, 425, 400);
+		
+		return scrollPane;
 	}
 
 }

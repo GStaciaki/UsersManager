@@ -49,10 +49,10 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		table = new JTable(dados, colunas);
 		scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(200, 50, 425, 400);
+		scrollPane.setBounds(200, 50, 425, 200);
 		add(scrollPane);
 
 		textId = new JLabel("ID Usuario: ");
@@ -100,6 +100,14 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				int id;
+				try {
+					id = Integer.parseInt(tfSetId.getText());
+				} catch (NumberFormatException ex) {
+					return;
+				}
+
 				add(textName);
 				add(tfName);
 				add(textAge);
@@ -109,7 +117,6 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 				add(btUpdate);
 				frameb.repaint();
 
-				Integer id = Integer.parseInt(tfSetId.getText());
 				Pessoa pessoa;
 
 				try {
@@ -152,11 +159,11 @@ public class UpdateScreen extends JPanel implements VisualWindow {
 		});
 
 		btGoBack.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frameb.activateInitialScreen();
-				
+
 			}
 		});
 	}

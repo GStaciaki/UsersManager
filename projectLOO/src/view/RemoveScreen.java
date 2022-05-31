@@ -85,7 +85,6 @@ public class RemoveScreen extends JPanel implements VisualWindow {
 
 					Register.removeUser(idUser);
 				} catch (SQLException | NumberFormatException e1) {
-
 					return;
 				}
 				try {
